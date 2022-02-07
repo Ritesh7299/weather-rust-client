@@ -7,8 +7,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let client = reqwest::Client::new();
 
     let mut map = HashMap::new();
-    map.insert("username", "rajalinv");
-    map.insert("password", "password");
+    map.insert("username", "ritesh");
+    map.insert("password", "1234");
 
     let auth_response = client
         .post("http://localhost:3000/v1/auth/")
@@ -20,7 +20,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .json::<model::Token>()
         .await?;
 
-    println!("\nToken obtained!\n");
+    println!("\nToken obtained successfully!\n");
 
     let jwt_key = token_model.jwt;
 
@@ -31,7 +31,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .await?
         .text()
         .await?;
-    println!("Welcome Page Content: {:?} ", home);
+    println!("Welcome Page: {:?} ", home);
 
     let weather_response = client
         .get("http://localhost:8001/v1/weather/")
@@ -43,7 +43,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .json::<model::Weather>()
         .await?;
 
-    println!("\nWeather data collected:\n{:?}",weather);
+    println!("\nWeather data:\n{:?}",weather);
 
     Ok(())
 }
